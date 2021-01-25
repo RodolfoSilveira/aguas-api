@@ -18,9 +18,11 @@ git clone https://github.com/RodolfoSilveira/aguas-api.git
 yarn
 ```
 
-**4. Run API**
+**3. Run API**
 
 `docker-compose up`
+or
+`docker-compose up -d`
 
 Entre dentro do container
 `docker exec -it api_inema sh`
