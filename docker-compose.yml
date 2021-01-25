@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres
+    container_name: 'db_postgres_inema'
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "inema"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - inema_network
+  app:
+    container_name: 'api_inema'
+    depends_on:
+      - db
+    build: .
+    ports:
+      - "9229:9229"
+      - "3333:3333"
+    volumes:
+      - .:/usr/app
+    environment:
+      DB_HOST: db_postgres_inema
+    command: yarn dev:server
+    networks:
+      - inema_network
+networks:
+  inema_network:
